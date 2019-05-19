@@ -1,5 +1,5 @@
 //
-// Source code recreated from A .class file by IntelliJ IDEA
+// Source code recreated from Action .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
 
@@ -11,8 +11,8 @@ import soot.SootMethod;
 import java.util.Iterator;
 import java.util.Map;
 
-public final class C extends SceneTransformer {
-    public C() {
+public final class AndroidAnalysis extends SceneTransformer {
+    public AndroidAnalysis() {
     }
 
     protected final void internalTransform(String var1, Map var2) {
@@ -35,9 +35,9 @@ public final class C extends SceneTransformer {
         L.a().b();
         Q.a();
         Q.b();
-        L.a().b(E.FSMOutputDir);
+        L.a().b(ConfigOptions.FSMOutputDir);
         Q.a();
-        Q.a(E.FSMOutputDir);
+        Q.a(ConfigOptions.FSMOutputDir);
     }
 
     private static void a() {
@@ -92,7 +92,7 @@ public final class C extends SceneTransformer {
                         var5.next();
                     }
                 } catch (RuntimeException var3) {
-                    System.out.println("[Action Analysis] AgentController: catch A runtime exception when retrieve active body. continue...");
+                    System.out.println("[Action Analysis] AgentController: catch Action runtime exception when retrieve active body. continue...");
                     var3.printStackTrace();
                 }
             }

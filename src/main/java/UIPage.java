@@ -1,5 +1,5 @@
 //
-// Source code recreated from A .class file by IntelliJ IDEA
+// Source code recreated from Action .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public final class W {
+public final class UIPage {
     public List a = new ArrayList();
     public List b = new ArrayList();
     private boolean c = false;
@@ -35,7 +35,7 @@ public final class W {
         return this.c ? this.d : null;
     }
 
-    public W() {
+    public UIPage() {
         this.a = new ArrayList();
         this.b = new ArrayList();
         this.n = new ArrayList();
@@ -73,7 +73,7 @@ public final class W {
                     if ((var10 = (var9 = var8.getAttributes()).getNamedItem("index")) != null) {
                         this.n.add(Integer.parseInt(var10.getNodeValue()));
                     } else {
-                        System.out.println("E: has not find \"index\" attribute ??");
+                        System.out.println("ConfigOptions: has not find \"index\" attribute ??");
                         System.exit(0);
                     }
 
@@ -114,7 +114,7 @@ public final class W {
 
                             this.a.add(var25);
                         } catch (NullPointerException var21) {
-                            System.out.println("E: has not find the specified attribute ??");
+                            System.out.println("ConfigOptions: has not find the specified attribute ??");
                             System.exit(0);
                         }
 
@@ -192,7 +192,7 @@ public final class W {
 
                             this.b.add(var24);
                         } catch (NullPointerException var22) {
-                            System.out.println("E: has not find the specified attribute ??");
+                            System.out.println("ConfigOptions: has not find the specified attribute ??");
                             System.exit(0);
                         }
 

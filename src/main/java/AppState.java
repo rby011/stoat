@@ -1,5 +1,5 @@
 //
-// Source code recreated from A .class file by IntelliJ IDEA
+// Source code recreated from Action .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
 
@@ -9,13 +9,13 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
-public class D {
+public class AppState {
     private List b = new ArrayList();
-    private List actionList = new ArrayList();
+    private List actionIDList = new ArrayList();
     private Map d = new HashMap();
     public List transitionList = new ArrayList();
     private int e;
-    private W f;
+    private UIPage f;
     private String g;
     private String h;
     private String i;
@@ -23,6 +23,9 @@ public class D {
     private String k;
     private String l;
 
+    // f.a, f.b 컬렉션 내 아이템별로 a(), b() 값을 얻어와 하나의 string 으로 만들어
+    // 이를 MD5 다이제스트로 인코드하고 이를 정수로 변환해서 저장한다
+    // 앱 상태를 정수로 표현하는 로직으로 보인다
     public final void a() {
         try {
             MessageDigest var1 = MessageDigest.getInstance("MD5");
@@ -42,7 +45,7 @@ public class D {
             var1.update(StandardCharsets.UTF_8.encode(var2));
             this.l = String.format("%032x", new BigInteger(1, var1.digest()));
         } catch (NoSuchAlgorithmException var5) {
-            System.out.println("[AppState] E: fail to generate md5 value!");
+            System.out.println("[AppState] ConfigOptions: fail to generate md5 value!");
             var5.printStackTrace();
             System.exit(0);
         }
@@ -52,7 +55,7 @@ public class D {
         return this.l;
     }
 
-    public D() {
+    public AppState() {
     }
 
     public final void a(String var1) {
@@ -69,7 +72,7 @@ public class D {
         this.h = var2;
     }
 
-    public final void updateTransition(String var1) {
+    public final void c(String var1) {
         this.i = var1;
     }
 
@@ -77,11 +80,11 @@ public class D {
         this.k = var1;
     }
 
-    public final void a(W var1) {
+    public final void a(UIPage var1) {
         this.f = var1;
     }
 
-    public final String updateTransition() {
+    public final String z() {
         return this.j;
     }
 
@@ -101,7 +104,7 @@ public class D {
         return this.k;
     }
 
-    public final W h() {
+    public final UIPage h() {
         return this.f;
     }
 
@@ -134,25 +137,25 @@ public class D {
 
     public final void a(Integer actionID) {
         System.out.println("[AppState] AgentController: add an action <id: " + actionID + "> into the app state'TestManager invokable actions list");
-        this.actionList.add(actionID);
+        this.actionIDList.add(actionID);
     }
 
     public final void m() {
         String var1 = "";
 
         Integer var3;
-        A var4;
-        for (Iterator var2 = this.actionList.iterator(); var2.hasNext(); var1 = var1 + "<" + var4.a + ">    " + var3 + "@" + var4.g()) {
+        Action var4;
+        for (Iterator var2 = this.actionIDList.iterator(); var2.hasNext(); var1 = var1 + "<" + var4.actionSource + ">    " + var3 + "@" + var4.getActionCommand()) {
             var3 = (Integer) var2.next();
-            B.a();
-            if ((var4 = B.a(var3)) == null) {
+            ActionHandler.getInstance();
+            if ((var4 = ActionHandler.getAction(var3)) == null) {
                 System.out.println("[AppState] AgentController: action id: " + var3);
-                System.out.println("[AppState] E: action is null !! ");
+                System.out.println("[AppState] ConfigOptions: action is null !! ");
                 System.exit(0);
             }
 
-            if (var4.g() == null) {
-                System.out.println("[AppState] E: action command is null ??");
+            if (var4.getActionCommand() == null) {
+                System.out.println("[AppState] ConfigOptions: action command is null ??");
             }
         }
 
@@ -163,17 +166,17 @@ public class D {
         String var1 = "";
 
         Integer var3;
-        A var4;
-        for (Iterator var2 = this.actionList.iterator(); var2.hasNext(); var1 = var1 + "    " + var3 + "@" + var4.g()) {
+        Action var4;
+        for (Iterator var2 = this.actionIDList.iterator(); var2.hasNext(); var1 = var1 + "    " + var3 + "@" + var4.getActionCommand()) {
             var3 = (Integer) var2.next();
-            B.a();
-            var4 = B.a(var3);
+            ActionHandler.getInstance();
+            var4 = ActionHandler.getAction(var3);
             if (/*!MA &&*/ var4 == null) {
                 throw new AssertionError();
             }
 
-            if (var4.g() == null) {
-                System.out.println("[AppState] E: action command is null ??");
+            if (var4.getActionCommand() == null) {
+                System.out.println("[AppState] ConfigOptions: action command is null ??");
             }
         }
 
@@ -203,7 +206,7 @@ public class D {
             transitionID = (Integer) iterator.next();
         } while (!(replace = (Transition) this.d.get(transitionID)).compareTransition(orginal)); // 그래프 형태인듯 하다
 
-        System.out.println("[AppState] AgentController: this is A duplicate transition, alias to the transition: id@ " + replace.getTransitionID());
+        System.out.println("[AppState] AgentController: this is Action duplicate transition, alias to the transition: id@ " + replace.getTransitionID());
         return replace;
     }
 
@@ -217,7 +220,7 @@ public class D {
     public final void o() {
         System.out.println("[AppState] AgentController:  this state has " + this.e + " transitions.");
         int var3;
-        if (E.s) {
+        if (ConfigOptions.s) {
             System.out.println("[AppState] AgentController: init the probab from fsm building");
             int var8 = 0;
 
@@ -255,7 +258,7 @@ public class D {
     public static String e(String var0) {
         int var1;
         if ((var1 = var0.lastIndexOf(47)) == -1) {
-            System.out.println("[AppState] E: Fail to locate the '/' in this appStateName: " + var0);
+            System.out.println("[AppState] ConfigOptions: Fail to locate the '/' in this appStateName: " + var0);
             System.exit(0);
         }
 

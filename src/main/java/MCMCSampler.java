@@ -1,5 +1,5 @@
 //
-// Source code recreated from A .class file by IntelliJ IDEA
+// Source code recreated from Action .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
 
@@ -29,7 +29,7 @@ public class MCMCSampler {
 
     private MCMCSampler() {
         a = 1;
-        e = E.MaxMCMCIteration/*restoreFSMFromFile.l*/;
+        e = ConfigOptions.MaxMCMCIteration/*restoreFSMFromFile.l*/;
         this.f = 0.0D;
         this.g = 0.0D;
     }
@@ -47,7 +47,7 @@ public class MCMCSampler {
         Iterator var15 = var1.a().entrySet().iterator();
 
         while (true) {
-            D var2;
+            AppState var2;
             String var3;
             String var4;
             do {
@@ -57,7 +57,7 @@ public class MCMCSampler {
                     return;
                 }
 
-                var3 = (var2 = (D) ((Entry) var15.next()).getValue()).d();
+                var3 = (var2 = (AppState) ((Entry) var15.next()).getValue()).d();
                 var4 = var2.e();
             } while (!var2.l());
 
@@ -102,12 +102,12 @@ public class MCMCSampler {
                     }
                 }
             } catch (IOException var6) {
-                System.out.println("[Gibbs Sampler] E: failed to restore transition probabilites, *readline* !");
+                System.out.println("[Gibbs Sampler] ConfigOptions: failed to restore transition probabilites, *readline* !");
                 var6.printStackTrace();
                 return;
             }
         } catch (FileNotFoundException var7) {
-            System.out.println("[Gibbs Sampler] E: can not found the optimal markov model file!");
+            System.out.println("[Gibbs Sampler] ConfigOptions: can not found the optimal markov model file!");
             var7.printStackTrace();
         }
 
@@ -196,7 +196,7 @@ public class MCMCSampler {
 
     private void b(AndroidAppFSM var1) {
         this.a(var1);
-        this.a(E.MCMCSamplingOutputDir/*restoreFSMFromFile.getExecutionCount*/ + "/" + E.ProabilityModelFileName/*restoreFSMFromFile.q*/);
+        this.a(ConfigOptions.MCMCSamplingOutputDir/*restoreFSMFromFile.getExecutionCount*/ + "/" + ConfigOptions.ProabilityModelFileName/*restoreFSMFromFile.q*/);
         ArrayList var2 = new ArrayList();
         TestManager.a().a(var1, this.b, 1);
         var2.clear();
@@ -210,7 +210,7 @@ public class MCMCSampler {
                 String var5 = TestManager.a().a(a);
                 this.h = Double.parseDouble(var5);
                 System.out.println("[Gibbs Sampler] AgentController: the test suite execution is finished. ");
-                this.b(E.MCMCSamplingOutputDir/*restoreFSMFromFile.getExecutionCount*/ + "/markov_model_test_suite_data.txt");
+                this.b(ConfigOptions.MCMCSamplingOutputDir/*restoreFSMFromFile.getExecutionCount*/ + "/markov_model_test_suite_data.txt");
                 ++a;
                 TestManager.a().a.clear();
             }
@@ -222,15 +222,15 @@ public class MCMCSampler {
         this.a(var1);
         double var2 = 0.0D;
         Map var5 = null;
-        a(E.MCMCSamplingOutputDir/*restoreFSMFromFile.getExecutionCount*/ + "/initial_markov_model.txt", this.b);
+        a(ConfigOptions.MCMCSamplingOutputDir/*restoreFSMFromFile.getExecutionCount*/ + "/initial_markov_model.txt", this.b);
 
         while (a <= e) {
             b(this.b);
-            a(E.MCMCSamplingOutputDir/*restoreFSMFromFile.getExecutionCount*/ + "/mcmc_models.txt", this.b, this.o);
-            this.b(E.MCMCSamplingOutputDir/*restoreFSMFromFile.getExecutionCount*/ + "/mcmc_data.txt");
-            if (E.t == 2) {
+            a(ConfigOptions.MCMCSamplingOutputDir/*restoreFSMFromFile.getExecutionCount*/ + "/mcmc_models.txt", this.b, this.o);
+            this.b(ConfigOptions.MCMCSamplingOutputDir/*restoreFSMFromFile.getExecutionCount*/ + "/mcmc_data.txt");
+            if (ConfigOptions.t == 2) {
                 var5 = this.a(this.b);
-            } else if (E.t == 1) {
+            } else if (ConfigOptions.t == 1) {
                 var5 = this.a(var1, this.b);
             }
 
@@ -245,7 +245,7 @@ public class MCMCSampler {
             this.l = (this.f - this.g) * 100.0D;
             if (this.g >= var2) {
                 var2 = this.g;
-                a(E.MCMCSamplingOutputDir/*restoreFSMFromFile.getExecutionCount*/ + "/optimal_markov_model.txt", var5);
+                a(ConfigOptions.MCMCSamplingOutputDir/*restoreFSMFromFile.getExecutionCount*/ + "/optimal_markov_model.txt", var5);
                 this.n = a + 1;
                 System.out.println("[Gibbs Sampler] AgentController: the current optimal model is from " + this.n + "th iteration!");
             }
@@ -316,7 +316,7 @@ public class MCMCSampler {
             var4.write("-----\n\n");
             var4.close();
         } catch (IOException var3) {
-            System.out.println("[Gibbs Sampler] failed to open A file");
+            System.out.println("[Gibbs Sampler] failed to open Action file");
             System.exit(0);
         }
     }
@@ -345,7 +345,7 @@ public class MCMCSampler {
             var6.write("-----\n\n");
             var6.close();
         } catch (IOException var5) {
-            System.out.println("[Gibbs Sampler] failed to open A file");
+            System.out.println("[Gibbs Sampler] failed to open Action file");
             System.exit(0);
         }
     }
@@ -367,7 +367,7 @@ public class MCMCSampler {
             var6.write(var2);
             var6.close();
         } catch (IOException var5) {
-            System.out.println("[Gibbs Sampler] failed to open A file");
+            System.out.println("[Gibbs Sampler] failed to open Action file");
             System.exit(0);
         }
     }
@@ -377,17 +377,17 @@ public class MCMCSampler {
         AndroidAppFSM var1;
         if (var0[0].equals("--test")) {
             System.out.println("start mcmc sampling");
-            E.b(var0[1]);
-            E.c(/*restoreFSMFromFile.increaseExecutionCount*/E.MCMCSamplingOutputConfig);
-            (var1 = new AndroidAppFSM((byte) 0)).restoreFSMFromFile(E.FSMFilePath/*restoreFSMFromFile.j*/ + "/FSM.txt");
+            ConfigOptions.b(var0[1]);
+            ConfigOptions.c(/*restoreFSMFromFile.increaseExecutionCount*/ConfigOptions.MCMCSamplingOutputConfig);
+            (var1 = new AndroidAppFSM((byte) 0)).restoreFSMFromFile(ConfigOptions.FSMFilePath/*restoreFSMFromFile.j*/ + "/FSM.txt");
             var1.f();
             TestManager.a().a(var1);
             a().c(var1);
         } else {
             if (var0[0].equals("--compare")) {
                 System.out.println("compare mcmc sampling");
-                E.c("CONF.txt");
-                (var1 = new AndroidAppFSM((byte) 0)).restoreFSMFromFile(E.FSMFilePath/*restoreFSMFromFile.j*/ + "/FSM.txt");
+                ConfigOptions.c("CONF.txt");
+                (var1 = new AndroidAppFSM((byte) 0)).restoreFSMFromFile(ConfigOptions.FSMFilePath/*restoreFSMFromFile.j*/ + "/FSM.txt");
                 var1.f();
                 TestManager.a().a(var1);
                 a().b(var1);

@@ -11,13 +11,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
-public final class E {
+public final class ConfigOptions {
     public static String AndroidSDKDir;     //  aList
     public static String AndroidLIBDir;     //  bList
-    public static int MaxFSMBuildingEvent;  //  updateTransition
-    public static int Port;                 //  d
+    public static int MaxFSMBuildingEvent;  //  c
+    public static int Port;                 //  setActionType
     public static String FSMOutputConfig;   //  restoreFSMFromFile
-    public static String FSMOutputDir;      //  f
+    public static String FSMOutputDir;      //  getActionType
     public static String MCMCSamplingOutputConfig;  //  increaseExecutionCount
     public static String MCMCSamplingOutputDir;     //  getExecutionCount
     public static String i;                 //  i
@@ -49,7 +49,7 @@ public final class E {
         File var1 = new File(cfgFileName);
 
         while(!var1.exists()) {
-            System.out.println("D: wait for the config file ");
+            System.out.println("AppState: wait for the config file ");
 
             try {
                 Thread.sleep(2000L);
@@ -110,11 +110,11 @@ public final class E {
                 }
                 br.close();
             } catch (IOException ex) {
-                System.out.println("[ConfigOptions] E: Error occurs when reading the configuration file. ");
+                System.out.println("[ConfigOptions] ConfigOptions: Error occurs when reading the configuration file. ");
                 return;
             }
         } catch (FileNotFoundException ex) {
-            System.out.println("[ConfigOptions] E: Can not find the configuration file: CONF.txt! ");
+            System.out.println("[ConfigOptions] ConfigOptions: Can not find the configuration file: CONF.txt! ");
             ex.printStackTrace();
         }
 

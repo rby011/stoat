@@ -1,5 +1,5 @@
 //
-// Source code recreated from A .class file by IntelliJ IDEA
+// Source code recreated from Action .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
 
@@ -56,12 +56,12 @@ public class AndroidAppAnalysis {
                     c = var1[1];
                 }
 
-                this.d = E.AndroidLIBDir;
+                this.d = ConfigOptions.AndroidLIBDir;
                 this.a(c);
                 String var9 = this.d;
                 var9 = var9 + ":" + c + "/bin/classes";
                 var9 = var9 + ":" + c + "/libs";
-                String[] var10000 = new String[]{"-W", "-keep-line-number", "-allow-phantom-refs", "-F", "J", "-PA", "cg", "verbose:true", "-cp", var9};
+                String[] var10000 = new String[]{"-UIPage", "-keep-line-number", "-allow-phantom-refs", "-F", "J", "-PA", "cg", "verbose:true", "-cp", var9};
                 String[] var13 = new String[var1.length - 2];
 
                 for(int var15 = 0; var15 < var1.length - 2; ++var15) {
@@ -79,7 +79,7 @@ public class AndroidAppAnalysis {
 
                 System.out.println("\n");
                 Options.v().parse(var13);
-                PackManager.v().getPack("wjtp").add(new Transform("wjtp.ActionAnalysis", new C()));
+                PackManager.v().getPack("wjtp").add(new Transform("wjtp.ActionAnalysis", new AndroidAnalysis()));
                 ArrayList var17 = new ArrayList();
                 Iterator var8 = this.f.iterator();
 

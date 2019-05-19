@@ -1,5 +1,5 @@
 //
-// Source code recreated from A .class file by IntelliJ IDEA
+// Source code recreated from Action .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
 
@@ -22,7 +22,7 @@ final class AgentController implements Runnable {
 
     public AgentController(String var1) {
         this.c = var1;
-        this.a = E.Port;
+        this.a = ConfigOptions.Port;
         System.out.println("[AgentController] AgentController: create controller " + this.c + ", at Port: " + this.a);
         new ArrayList();
         this.d = new ArrayList();
@@ -53,7 +53,7 @@ final class AgentController implements Runnable {
 
         try {
             Socket var2 = var1.accept();
-            System.out.println("[AgentController] AgentController: A client connected to this server. ");
+            System.out.println("[AgentController] AgentController: Action client connected to this server. ");
 
             try {
                 BufferedReader var3 = new BufferedReader(new InputStreamReader(var2.getInputStream()));
@@ -105,7 +105,7 @@ final class AgentController implements Runnable {
                             System.out.println("[AgentController] AgentController: stop mcmc sampling");
                             System.exit(0);
                         } else {
-                            System.out.println("[AgentController] E: invalid message!!!");
+                            System.out.println("[AgentController] ConfigOptions: invalid message!!!");
                             System.exit(0);
                         }
                     }

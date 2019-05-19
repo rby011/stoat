@@ -1,21 +1,21 @@
 //
-// Source code recreated from A .class file by IntelliJ IDEA
+// Source code recreated from Action .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
 
-public final class PA extends A {
+public final class PA extends Action {
     private int c;
     private String d;
 
     public PA() {
-        this.a(-1);
+        this.setViewID(-1);
         this.c = -1;
         this.d = "";
-        this.d("");
+        this.setActionType("");
         this.c("");
     }
 
     public final String toString() {
-        return Integer.toHexString(this.c()) + "\t" + this.d() + "     " + this.f() + "\t\t" + this.c + "\t  " + this.d + "\t\t" + this.e();
+        return Integer.toHexString(this.getViewID()) + "\t" + this.getViewText() + "     " + this.getActionType() + "\t\t" + this.c + "\t  " + this.d + "\t\t" + this.e();
     }
 }

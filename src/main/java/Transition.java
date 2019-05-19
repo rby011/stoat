@@ -1,5 +1,5 @@
 //
-// Source code recreated from A .class file by IntelliJ IDEA
+// Source code recreated from Action .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
 
@@ -24,8 +24,8 @@ public final class Transition {
         this.uState = uState;
         this.vState = vState;
         this.c = var3;
-        B.a();
-        this.d = B.a(var3).g();
+        ActionHandler.getInstance();
+        this.d = ActionHandler.getAction(var3).getActionCommand();
     }
 
     public final String getSourceState() {

@@ -1,5 +1,5 @@
 //
-// Source code recreated from A .class file by IntelliJ IDEA
+// Source code recreated from Action .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
 
@@ -32,9 +32,9 @@ public class TestManager {
     }
 
     public final void a(AndroidAppFSM fsm) {
-        suiteSize = E.MaxTestSuiteSize;/*seqLength.m*/
-        if ((seqLength = (int) Math.sqrt((double) fsm.transitionCount)) > E.MaxTestSequenceLength/*seqLength.n*/) {
-            seqLength = E.MaxTestSequenceLength;/*seqLength.n;*/
+        suiteSize = ConfigOptions.MaxTestSuiteSize;/*seqLength.m*/
+        if ((seqLength = (int) Math.sqrt((double) fsm.transitionCount)) > ConfigOptions.MaxTestSequenceLength/*seqLength.n*/) {
+            seqLength = ConfigOptions.MaxTestSequenceLength;/*seqLength.n;*/
         }
 
         emulatorPoolSize = 1;
@@ -112,7 +112,7 @@ public class TestManager {
             }
 
             double var15;
-            if (E.u) {
+            if (ConfigOptions.u) {
                 var15 = Math.random() * var14;
             } else {
                 var15 = var14 - Math.random() * var14;
@@ -174,9 +174,9 @@ public class TestManager {
                     ++var4;
                     List var9 = (List) var2.get(var5);
                     int var10 = -1;
-                    if (/*seqLength.p*/E.ProabilityModelMode == 1) {
+                    if (/*seqLength.p*/ConfigOptions.ProabilityModelMode == 1) {
                         var10 = a(var9, 5);
-                    } else if (/*seqLength.p*/E.ProabilityModelMode == 2) {
+                    } else if (/*seqLength.p*/ConfigOptions.ProabilityModelMode == 2) {
                         var10 = a(var9);
                     } else {
                         System.exit(-1);
@@ -199,15 +199,15 @@ public class TestManager {
                 this.b.add(var8);
                 var4 = 0;
                 if (++d % 5 == 0) {
-                    this.a(var1, /*seqLength.getExecutionCount*/E.MaxTestSequenceLength + "/markov_model_test_suite_data.txt", var6);
+                    this.a(var1, /*seqLength.getExecutionCount*/ConfigOptions.MaxTestSequenceLength + "/markov_model_test_suite_data.txt", var6);
                     ++var6;
                 }
-            } while (d < /*seqLength.o*/E.MaxTestSuiteComparision);
+            } while (d < /*seqLength.o*/ConfigOptions.MaxTestSuiteComparision);
 
             System.out.println("[TestManager] AgentController: exceed the max test suite size: " +
-                    /*seqLength.o*/E.MaxTestSuiteComparision + ", covered nodes cnt: " + this.i.size() +
+                    /*seqLength.o*/ConfigOptions.MaxTestSuiteComparision + ", covered nodes cnt: " + this.i.size() +
                     ", total node cnt: " + var1.stateCount + ", covered edges cnt: " + this.j.size() + ", total edge cnt: " + var1.transitionCount);
-            this.a(var1, E.MCMCSamplingOutputDir/*seqLength.getExecutionCount*/ + "/markov_model_test_suite_data.txt", var6);
+            this.a(var1, ConfigOptions.MCMCSamplingOutputDir/*seqLength.getExecutionCount*/ + "/markov_model_test_suite_data.txt", var6);
         }
     }
 
@@ -222,7 +222,7 @@ public class TestManager {
             var6.write("-----\n\n");
             var6.close();
         } catch (IOException var5) {
-            System.out.println("[TestManager] failed to open A file");
+            System.out.println("[TestManager] failed to open Action file");
             System.exit(0);
         }
     }
@@ -297,7 +297,7 @@ public class TestManager {
         }
 
         System.out.println("[TestManager] AgentController: dump the generated test suite to the file ...");
-        this.b(/*seqLength.getExecutionCount*/E.MCMCSamplingOutputDir + "/mcmc_all_history_testsuites.txt");
+        this.b(/*seqLength.getExecutionCount*/ConfigOptions.MCMCSamplingOutputDir + "/mcmc_all_history_testsuites.txt");
     }
 
     public final double b(AndroidAppFSM var1) {
@@ -399,7 +399,7 @@ public class TestManager {
         if (this.i != null) {
             this.i.add(var1);
         } else {
-            System.out.println("[TestManager] E: nodes state set is null? ");
+            System.out.println("[TestManager] ConfigOptions: nodes state set is null? ");
             System.exit(0);
         }
     }
@@ -408,7 +408,7 @@ public class TestManager {
         if (this.j != null) {
             this.j.add(var1);
         } else {
-            System.out.println("[TestManager] E: edges set is null? ");
+            System.out.println("[TestManager] ConfigOptions: edges set is null? ");
             System.exit(0);
         }
     }
@@ -453,7 +453,7 @@ public class TestManager {
             var2.write(var3);
             var2.close();
         } catch (IOException var7) {
-            System.out.println("[TestManager] E: failed to open the file: " + var1 + " to dump the test suite.");
+            System.out.println("[TestManager] ConfigOptions: failed to open the file: " + var1 + " to dump the test suite.");
         }
     }
 }

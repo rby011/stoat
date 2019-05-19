@@ -1,9 +1,9 @@
 //
-// Source code recreated from A .class file by IntelliJ IDEA
+// Source code recreated from Action .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
 
-public final class H extends A {
+public final class H extends Action {
     public H() {
     }
 }

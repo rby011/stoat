@@ -1,15 +1,15 @@
 //
-// Source code recreated from A .class file by IntelliJ IDEA
+// Source code recreated from Action .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
 
-public final class KA extends A {
+public final class KA extends Action {
     private String c;
     private int d;
     private String e;
 
     public KA() {
-        this.a(-1);
+        this.setViewID(-1);
         this.c = "";
         this.d = -1;
         this.e = "";
@@ -29,6 +29,6 @@ public final class KA extends A {
     }
 
     public final String toString() {
-        return Integer.toHexString(this.c()) + "\t" + this.c + "\t\t" + this.d + "\t" + this.e + "\t\t" + this.e();
+        return Integer.toHexString(this.getViewID()) + "\t" + this.c + "\t\t" + this.d + "\t" + this.e + "\t\t" + this.e();
     }
 }

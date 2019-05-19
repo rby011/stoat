@@ -1,14 +1,14 @@
 //
-// Source code recreated from A .class file by IntelliJ IDEA
+// Source code recreated from Action .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
 
-public final class MA extends A {
+public final class MA extends Action {
     public MA() {
-        this.d("click");
+        this.setActionType("click");
     }
 
     public final String toString() {
-        return Integer.toHexString(this.c()) + " " + this.d() + " " + this.f();
+        return Integer.toHexString(this.getViewID()) + " " + this.getViewText() + " " + this.getActionType();
     }
 }

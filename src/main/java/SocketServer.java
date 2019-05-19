@@ -1,5 +1,5 @@
 //
-// Source code recreated from A .class file by IntelliJ IDEA
+// Source code recreated from Action .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
 
@@ -28,7 +28,7 @@ public class SocketServer {
         try {
             while (true) {
                 Socket var2 = var13.accept();
-                System.out.println("[SocketServer] AgentController: A client connected to this server. ");
+                System.out.println("[SocketServer] AgentController: Action client connected to this server. ");
 
                 try {
                     BufferedReader var3 = new BufferedReader(new InputStreamReader(var2.getInputStream()));
@@ -48,8 +48,8 @@ public class SocketServer {
 
                             if (!var5.equals("AVD_STATE_EOM")) {
                                 if (var5.equals("ENTRY_ACTIVITY_EOM")) {
-                                    E.i = var6.toString().replace("\n", "");
-                                    System.out.println("[SocketServer] AgentController: get the entry activity: " + E.i);
+                                    ConfigOptions.i = var6.toString().replace("\n", "");
+                                    System.out.println("[SocketServer] AgentController: get the entry activity: " + ConfigOptions.i);
                                     break label221;
                                 }
 
@@ -91,13 +91,13 @@ public class SocketServer {
                     }
 
                     System.out.println("-----------");
-                    AndroidAppFSM.c().f(E.FSMOutputDir/*restoreFSMFromFile.f*/ + "/allstates.txt");
-                    AndroidAppFSM.c().b(E.FSMOutputDir/*restoreFSMFromFile.f*/ + "/fsm_states_edges.txt");
-                    AndroidAppFSM.c().c(E.FSMOutputDir/*restoreFSMFromFile.f*/ + "/app.gv");
-                    AndroidAppFSM.c().d(E.FSMOutputDir/*restoreFSMFromFile.f*/ + "/FSM.txt");
+                    AndroidAppFSM.c().f(ConfigOptions.FSMOutputDir/*restoreFSMFromFile.getActionType*/ + "/allstates.txt");
+                    AndroidAppFSM.c().b(ConfigOptions.FSMOutputDir/*restoreFSMFromFile.getActionType*/ + "/fsm_states_edges.txt");
+                    AndroidAppFSM.c().c(ConfigOptions.FSMOutputDir/*restoreFSMFromFile.getActionType*/ + "/app.gv");
+                    AndroidAppFSM.c().d(ConfigOptions.FSMOutputDir/*restoreFSMFromFile.getActionType*/ + "/FSM.txt");
                     var4.println("server: Goodbye!");
                     System.out.println("[SocketServer] AgentController: the server sends *Goodbye* to the [a3e] client, and close the connection with the [a3e] client. ");
-                    System.out.println("[SocketServer] AgentController: the current executed events count: " + a + " maximum allowed events: " + E.MaxFSMBuildingEvent/*restoreFSMFromFile.updateTransition*/);
+                    System.out.println("[SocketServer] AgentController: the current executed events count: " + a + " maximum allowed events: " + ConfigOptions.MaxFSMBuildingEvent/*restoreFSMFromFile.c*/);
                     System.out.println("-----------");
                     System.out.println("\n\n");
                     var4.close();
@@ -111,21 +111,21 @@ public class SocketServer {
     }
 
     public static void main(String[] args) {
-        E.a(args[0]);
-        E.c(/*restoreFSMFromFile.restoreFSMFromFile*/E.FSMOutputConfig);
+        ConfigOptions.a(args[0]);
+        ConfigOptions.c(/*restoreFSMFromFile.restoreFSMFromFile*/ConfigOptions.FSMOutputConfig);
         args = (String[]) Arrays.copyOfRange(args, 1, args.length);
         System.out.println("AgentController: start android app static analysis to detect actions.... ");
-        if (E.StaticAnalysisResult/*restoreFSMFromFile.k*/) {
+        if (ConfigOptions.StaticAnalysisResult/*restoreFSMFromFile.k*/) {
             (new AndroidAppAnalysis()).a(args);
         }
 
-        B.a();
-        B.c();
-        System.out.println("AgentController: finish static analysis, there are total [" + B.a + "] statically inferred actions.");
-        B.a();
-        B.b();
+        ActionHandler.getInstance();
+        ActionHandler.c();
+        System.out.println("AgentController: finish static analysis, there are total [" + ActionHandler.a + "] statically inferred actions.");
+        ActionHandler.getInstance();
+        ActionHandler.printActionList();
         SocketServer var1 = new SocketServer();
-        int var3 = E.Port/*restoreFSMFromFile.d*/;
+        int var3 = ConfigOptions.Port/*restoreFSMFromFile.setActionType*/;
         System.out.println("Port = " + var3);
 
         try {

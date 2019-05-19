@@ -1,5 +1,5 @@
 //
-// Source code recreated from A .class file by IntelliJ IDEA
+// Source code recreated from Action .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
 
@@ -15,7 +15,7 @@ public class SocketClient {
     }
 
     public static void main(String[] args) {
-        String ipString = JOptionPane.showInputDialog("Enter IP Address of A machine that is\nrunning the date service on Port 9090:");
+        String ipString = JOptionPane.showInputDialog("Enter IP Address of Action machine that is\nrunning the date service on Port 9090:");
 
         try {
             Socket socket = new Socket(ipString, 9090);

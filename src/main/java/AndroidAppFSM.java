@@ -1,5 +1,5 @@
 //
-// Source code recreated from A .class file by IntelliJ IDEA
+// Source code recreated from Action .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
 
@@ -29,7 +29,7 @@ public class AndroidAppFSM {
     }
 
     public static String b() {
-        return E.FSMFilePath + "/ui/S_1.xml";
+        return ConfigOptions.FSMFilePath + "/ui/S_1.xml";
     }
 
     private AndroidAppFSM() {
@@ -63,13 +63,13 @@ public class AndroidAppFSM {
         return this.i;
     }
 
-    private D g() {
+    private AppState g() {
         int var1 = this.e - 2;
         if (/*J || decompiled 된 원문장*/var1 >= 0 && var1 < this.d.size()) {
             String var3 = (String)this.d.get(var1);
-            D var4;
+            AppState var4;
             if (!(var4 = this.a(var3)).l()) {
-                var3 = var4.updateTransition();
+                var3 = var4.z();
                 var4 = this.a(var3);
             }
 
@@ -80,7 +80,7 @@ public class AndroidAppFSM {
     }
 
     private String h() {
-        D var1 = this.g();
+        AppState var1 = this.g();
         System.out.println("[AndroidAppFSM] AgentController: the last state is: " + var1.d());
         return var1.d();
     }
@@ -89,46 +89,46 @@ public class AndroidAppFSM {
         return this.d;
     }
 
-    public final D a(String var1) {
-        return (D)this.c.get(var1);
+    public final AppState a(String var1) {
+        return (AppState)this.c.get(var1);
     }
 
     public final void a(String var1, int var2) {
-        String var3 = D.e(var1);
+        String var3 = AppState.e(var1);
         System.out.println("[AndroidAppFSM] AgentController: building the app FSM, the received app state name: " + var3 + ", the executed action id: " + var2);
-        D var5 = this.a(var1);
-        D var4;
+        AppState var5 = this.a(var1);
+        AppState var4;
         if ((var4 = this.g()).k()) {
             if (var4.g().equals("RESET_APP_STATE") && !var5.k()) {
-                System.out.println("[AndroidAppFSM] AgentController: the last state is A *RESET* app state, the current state is the entry app state ");
+                System.out.println("[AndroidAppFSM] AgentController: the last state is Action *RESET* app state, the current state is the entry app state ");
                 return;
             }
 
             if (var4.g().equals("EMPTY_APP_STATE") && var5.k()) {
-                System.out.println("[AndroidAppFSM] AgentController: the last state is an *EMPTY* app state, the current state is A *RESET* app state");
+                System.out.println("[AndroidAppFSM] AgentController: the last state is an *EMPTY* app state, the current state is Action *RESET* app state");
                 return;
             }
         }
 
         Transition var6;
         if (var5.l()) {
-            System.out.println("[AndroidAppFSM] AgentController: this received app state: " + var3 + " is A *new* state, the transition is A *new* transition. ");
+            System.out.println("[AndroidAppFSM] AgentController: this received app state: " + var3 + " is Action *new* state, the transition is Action *new* transition. ");
             var6 = new Transition(this.h(), this.g, var2);
             var4.a(var6);
             System.out.println("[AndroidAppFSM] AgentController: the new transition is : ");
             System.out.println(var6.toString());
         } else {
             System.out.println("[AndroidAppFSM] AgentController: this received app state: " + var3 + " is an *old* app state.");
-            var6 = new Transition(this.h(), var5.updateTransition(), var2);
+            var6 = new Transition(this.h(), var5.z(), var2);
             Transition var7;
             if ((var7 = var4.b(var6)) == null) {
-                System.out.println("[AndroidAppFSM] AgentController: the transition is A *new* transition. ");
+                System.out.println("[AndroidAppFSM] AgentController: the transition is Action *new* transition. ");
                 System.out.println("[AndroidAppFSM] AgentController: this is the new transition: ");
                 System.out.println(var6.toString());
                 var4.a(var6);
             } else {
                 System.out.println("[AndroidAppFSM] AgentController: the transition is an *old* transition: ");
-                D.updateTransition(var7);
+                AppState.updateTransition(var7);
             }
         }
     }
@@ -140,8 +140,8 @@ public class AndroidAppFSM {
 
         while(var1.hasNext()) {
             String var2 = (String)var1.next();
-            D var3;
-            if ((var3 = (D)this.c.get(var2)).l()) {
+            AppState var3;
+            if ((var3 = (AppState)this.c.get(var2)).l()) {
                 System.out.println("[AndroidAppFSM] AgentController: unique state: " + var3.e());
                 var3.o();
             }
@@ -156,8 +156,8 @@ public class AndroidAppFSM {
         Iterator var2 = this.c.entrySet().iterator();
 
         while(var2.hasNext()) {
-            D var4;
-            if ((var4 = (D)((Entry)var2.next()).getValue()).l()) {
+            AppState var4;
+            if ((var4 = (AppState)((Entry)var2.next()).getValue()).l()) {
                 ++this.stateCount;
                 this.transitionCount += var4.i();
             }
@@ -169,7 +169,7 @@ public class AndroidAppFSM {
         try {
             (var3 = new PrintWriter(new BufferedWriter(new FileWriter(var1, true)))).write(this.stateCount + "  " + this.transitionCount + "\n");
         } catch (IOException var5) {
-            System.out.println("[AndroidAppFSM] E: failed to write fsm_building_progress_file!");
+            System.out.println("[AndroidAppFSM] ConfigOptions: failed to write fsm_building_progress_file!");
             var5.printStackTrace();
         }
 
@@ -187,7 +187,7 @@ public class AndroidAppFSM {
 
         while(true) {
             String var8;
-            D var17;
+            AppState var17;
             do {
                 if (!var7.hasNext()) {
                     var6 = var6 + "}";
@@ -196,7 +196,7 @@ public class AndroidAppFSM {
                     try {
                         (var16 = new PrintWriter(var1, "UTF-8")).write(var6);
                     } catch (IOException var14) {
-                        System.out.println("[AndroidAppFSM] E: failed to export dot file!");
+                        System.out.println("[AndroidAppFSM] ConfigOptions: failed to export dot file!");
                         var14.printStackTrace();
                     }
 
@@ -205,7 +205,7 @@ public class AndroidAppFSM {
                 }
 
                 var8 = (String)var7.next();
-            } while(!(var17 = (D)this.c.get(var8)).l());
+            } while(!(var17 = (AppState)this.c.get(var8)).l());
 
             System.out.println("\tunique state name: " + var17.e());
             Iterator var9 = var17.transitionList.iterator();
@@ -215,11 +215,11 @@ public class AndroidAppFSM {
                 Transition var15;
                 String var11 = (var15 = var17.a(var10)).getSourceState();
                 String var12 = var15.getDestinationState();
-                System.out.println("\t\ttransition: " + ((D)this.c.get(var11)).e() + " -> " + ((D)this.c.get(var12)).e() + ", action:" + var15.d());
-                if (((D)this.c.get(var12)).k()) {
-                    var6 = var6 + var2 + ((D)this.c.get(var11)).e() + var4 + ((D)this.c.get(var12)).e() + var2 + "[ style=dotted,label=\"@" + var15.c() + "\"] " + var5 + var3;
+                System.out.println("\t\ttransition: " + ((AppState)this.c.get(var11)).e() + " -> " + ((AppState)this.c.get(var12)).e() + ", action:" + var15.d());
+                if (((AppState)this.c.get(var12)).k()) {
+                    var6 = var6 + var2 + ((AppState)this.c.get(var11)).e() + var4 + ((AppState)this.c.get(var12)).e() + var2 + "[ style=dotted,label=\"@" + var15.c() + "\"] " + var5 + var3;
                 } else {
-                    var6 = var6 + var2 + ((D)this.c.get(var11)).e() + var4 + ((D)this.c.get(var12)).e() + var2 + "[ label=\"@" + var15.c() + "\"] " + var5 + var3;
+                    var6 = var6 + var2 + ((AppState)this.c.get(var11)).e() + var4 + ((AppState)this.c.get(var12)).e() + var2 + "[ label=\"@" + var15.c() + "\"] " + var5 + var3;
                 }
             }
         }
@@ -236,12 +236,12 @@ public class AndroidAppFSM {
 
             label29:
             while(true) {
-                D var3;
+                AppState var3;
                 do {
                     if (!var6.hasNext()) {
                         break label29;
                     }
-                } while(!(var3 = (D)((Entry)var6.next()).getValue()).l());
+                } while(!(var3 = (AppState)((Entry)var6.next()).getValue()).l());
 
                 var2.println(var3.d());
                 var2.println(var3.e() + ";" + var3.f() + ";" + var3.i());
@@ -253,7 +253,7 @@ public class AndroidAppFSM {
                 }
             }
         } catch (IOException var5) {
-            System.out.println("[AndroidAppFSM] E: failed to dump FSM!");
+            System.out.println("[AndroidAppFSM] ConfigOptions: failed to dump FSM!");
             var5.printStackTrace();
         }
 
@@ -279,11 +279,11 @@ public class AndroidAppFSM {
                 this.transitionCount = transitionCnt;
 
                 for(int i = 0; i < stateCnt; ++i) {
-                    D var5 = new D();
+                    AppState var5 = new AppState();
                     agentControllerName = br.readLine();
                     var5.b(agentControllerName);
                     int var6 = Integer.parseInt((var14 = br.readLine().split(";"))[2]);
-                    var5.updateTransition(var14[1]);
+                    var5.c(var14[1]);
 
                     for(int var7 = 0; var7 < var6; ++var7) {
                         var14 = br.readLine().split(";");
@@ -306,33 +306,33 @@ public class AndroidAppFSM {
                     this.g = var16;
                 }
             } catch (IOException var9) {
-                System.out.println("[AndroidAppFSM] E: failed to restore FSM, *readline* !");
+                System.out.println("[AndroidAppFSM] ConfigOptions: failed to restore FSM, *readline* !");
                 var9.printStackTrace();
                 return;
             }
         } catch (FileNotFoundException var10) {
-            System.out.println("[AndroidAppFSM] E: failed to restore FSM!");
+            System.out.println("[AndroidAppFSM] ConfigOptions: failed to restore FSM!");
             var10.printStackTrace();
         }
 
     }
 
     public final void a(String var1, String var2) {
-        D var3 = new D();
-        W var4 = new W();
+        AppState var3 = new AppState();
+        UIPage var4 = new UIPage();
         if (var1.contains("EMPTY_APP_STATE")) {
             var3.b(var1);
-            var3.updateTransition(var2);
+            var3.c(var2);
             var3.d("EMPTY_APP_STATE");
-            System.out.println("D: this is an empty state! ");
+            System.out.println("AppState: this is an empty state! ");
         } else if (var1.contains("RESET_APP_STATE")) {
             var3.b(var1);
-            var3.updateTransition(var2);
+            var3.c(var2);
             var3.d("RESET_APP_STATE");
-            System.out.println("D: this is A reset state! ");
+            System.out.println("AppState: this is Action reset state! ");
         } else {
             var3.b(var1);
-            var3.updateTransition(var2);
+            var3.c(var2);
 
             try {
                 File var6 = new File(var1);
@@ -345,23 +345,23 @@ public class AndroidAppFSM {
                         if ((var10 = var8.item(0)).hasChildNodes()) {
                             var4.a(var10.getChildNodes(), false, false, false, false);
                         } else {
-                            System.out.println("E: the root element \"hierarchy\" has no child nodes?? ");
+                            System.out.println("ConfigOptions: the root element \"hierarchy\" has no child nodes?? ");
                             System.exit(0);
                         }
                     } else {
-                        System.out.println("E: the root element node is not the unique \"hierarchy\"?? ");
+                        System.out.println("ConfigOptions: the root element node is not the unique \"hierarchy\"?? ");
                         System.exit(0);
                     }
                 }
             } catch (Exception var5) {
                 System.out.println(var5.getMessage());
-                System.out.println("D: error when parsing the xml file");
+                System.out.println("AppState: error when parsing the xml file");
                 System.exit(0);
             }
         }
 
         var3.a(var4);
-        D var9 = var3;
+        AppState var9 = var3;
         String var12 = var3.d();
         this.c.put(var12, var9);
         this.d.add(var12);
@@ -372,11 +372,11 @@ public class AndroidAppFSM {
         var12 = var9.b();
         System.out.println("[AndroidAppFSM] its md5 value = " + var12);
         if (this.f.containsKey(var12)) {
-            D var11 = (D)this.f.get(var12);
+            AppState var11 = (AppState)this.f.get(var12);
             var9.a(var11.d());
             System.out.println("[AndroidAppFSM] AgentController: the app state: " + var9.e() + " is alias to this previous state: " + var11.e());
         } else {
-            System.out.println("[AndroidAppFSM] AgentController: this is A new app state");
+            System.out.println("[AndroidAppFSM] AgentController: this is Action new app state");
             this.f.put(var12, var9);
         }
     }
@@ -400,7 +400,7 @@ public class AndroidAppFSM {
         while(var3.hasNext()) {
             Entry var4;
             String var5 = (String)(var4 = (Entry)var3.next()).getKey();
-            D var7 = (D)var4.getValue();
+            AppState var7 = (AppState)var4.getValue();
             var2.println("the state file name: " + var5);
             var2.println(var7.toString());
             var2.println("-----------\n");
@@ -411,18 +411,18 @@ public class AndroidAppFSM {
     }
 
     public final String g(String var1) {
-        D var2;
-        W var3 = (var2 = (D)this.c.get(var1)).h();
+        AppState var2;
+        UIPage var3 = (var2 = (AppState)this.c.get(var1)).h();
         System.out.println("[AndroidAppFSM] AgentController: start to detect invokable actions in the current app state. ");
         if (var3.b.size() == 0) {
             if (var2.g().equals("EMPTY_APP_STATE")) {
                 System.out.println("[AndroidAppFSM] AgentController: the app state does not has view components, this is an empty state.");
-                B.a();
-                B.a(var2);
+                ActionHandler.getInstance();
+                ActionHandler.a(var2);
             } else if (var2.g().equals("RESET_APP_STATE")) {
-                System.out.println("[AndroidAppFSM] AgentController: the app state does not has view components, this is A reset state.");
-                B.a();
-                B.b(var2);
+                System.out.println("[AndroidAppFSM] AgentController: the app state does not has view components, this is Action reset state.");
+                ActionHandler.getInstance();
+                ActionHandler.b(var2);
             }
 
             System.out.println("==========");
@@ -453,32 +453,32 @@ public class AndroidAppFSM {
                         while((var1 = var16.readLine()) != null) {
                             System.out.println("AgentController: " + var1 + "#");
                             H var17;
-                            (var17 = new H()).a();
+                            (var17 = new H()).setActionID();
                             var17.a("");
                             var17.c(var2.f());
                             var8 = "Screen";
-                            var17.a = var8;
-                            var17.d("tap");
+                            var17.actionSource = var8;
+                            var17.setActionType("tap");
                             var1 = var1 + "\n";
-                            var17.a(var1, "");
-                            B.a();
-                            Integer var13 = B.a(var17);
+                            var17.setActionCommand(var1, "");
+                            ActionHandler.getInstance();
+                            Integer var13 = ActionHandler.addAction(var17);
                             var2.a(var13);
-                            System.out.println("[AndroidAppFSM] AgentController: create A *Tap* Action!");
+                            System.out.println("[AndroidAppFSM] AgentController: create Action *Tap* Action!");
                         }
                     } catch (IOException var9) {
-                        System.out.println("[AndroidAppFSM] E: failed to read overflow menu file, *readline* !");
+                        System.out.println("[AndroidAppFSM] ConfigOptions: failed to read overflow menu file, *readline* !");
                         var9.printStackTrace();
                         System.exit(0);
                     }
                 } catch (FileNotFoundException var10) {
-                    System.out.println("[AndroidAppFSM] E: failed to read overflow menu fil!");
+                    System.out.println("[AndroidAppFSM] ConfigOptions: failed to read overflow menu fil!");
                     var10.printStackTrace();
                     System.exit(0);
                 }
 
-                B.a();
-                B.c(var2);
+                ActionHandler.getInstance();
+                ActionHandler.c(var2);
                 System.out.println("==========");
                 System.out.println("[AndroidAppFSM] AgentController: the final detected invokable actions on this app state: ");
                 var2.m();
@@ -514,13 +514,13 @@ public class AndroidAppFSM {
                                                                 if (var11.f().contains(".SeekBar")) {
                                                                     System.out.println("clickable = " + var11.i());
                                                                     if (var11.i()) {
-                                                                        (var6 = new H()).a();
+                                                                        (var6 = new H()).setActionID();
                                                                         var6.a(var11.e());
-                                                                        var6.b(var11.d());
+                                                                        var6.setViewText(var11.d());
                                                                         var6.c(var2.f());
                                                                         var8 = "Screen";
-                                                                        var6.a = var8;
-                                                                        var6.d("click");
+                                                                        var6.actionSource = var8;
+                                                                        var6.setActionType("click");
                                                                         if (!var11.g().equals("")) {
                                                                             var7 = "click(resource-id='" + var11.g() + "')\n";
                                                                         } else if (!var11.h().equals("")) {
@@ -529,23 +529,23 @@ public class AndroidAppFSM {
                                                                             var7 = "click(className='" + var11.f() + "',instance='" + var11.a() + "')\n";
                                                                         }
 
-                                                                        var6.a(var7, var11.f());
-                                                                        B.a();
-                                                                        var5 = B.a(var6);
+                                                                        var6.setActionCommand(var7, var11.f());
+                                                                        ActionHandler.getInstance();
+                                                                        var5 = ActionHandler.addAction(var6);
                                                                         var2.a(var5);
-                                                                        System.out.println("[AndroidAppFSM] AgentController: create A *SeekBar Click* Action!");
+                                                                        System.out.println("[AndroidAppFSM] AgentController: create Action *SeekBar Click* Action!");
                                                                     }
                                                                 }
                                                             } else {
                                                                 System.out.println("checkable = " + var11.k());
                                                                 if (var11.k()) {
-                                                                    (var6 = new H()).a();
+                                                                    (var6 = new H()).setActionID();
                                                                     var6.a(var11.e());
-                                                                    var6.b(var11.d());
+                                                                    var6.setViewText(var11.d());
                                                                     var6.c(var2.f());
                                                                     var8 = "Screen";
-                                                                    var6.a = var8;
-                                                                    var6.d("click");
+                                                                    var6.actionSource = var8;
+                                                                    var6.setActionType("click");
                                                                     if (!var11.g().equals("")) {
                                                                         var7 = "click(resource-id='" + var11.g() + "')\n";
                                                                     } else if (!var11.d().equals("")) {
@@ -560,21 +560,21 @@ public class AndroidAppFSM {
                                                                         var7 = "click(className='" + var11.f() + "',instance='" + var11.a() + "')\n";
                                                                     }
 
-                                                                    var6.a(var7, var11.f());
-                                                                    B.a();
-                                                                    var5 = B.a(var6);
+                                                                    var6.setActionCommand(var7, var11.f());
+                                                                    ActionHandler.getInstance();
+                                                                    var5 = ActionHandler.addAction(var6);
                                                                     var2.a(var5);
-                                                                    System.out.println("[AndroidAppFSM] AgentController: create A *CheckBox/RadioButton* Action!");
+                                                                    System.out.println("[AndroidAppFSM] AgentController: create Action *CheckBox/RadioButton* Action!");
                                                                 }
                                                             }
                                                         } else {
-                                                            (var6 = new H()).a();
+                                                            (var6 = new H()).setActionID();
                                                             var6.a(var11.e());
-                                                            var6.b(var11.d());
+                                                            var6.setViewText(var11.d());
                                                             var6.c(var2.f());
                                                             var8 = "Screen";
-                                                            var6.a = var8;
-                                                            var6.d("edit");
+                                                            var6.actionSource = var8;
+                                                            var6.setActionType("edit");
                                                             if (!var11.g().equals("")) {
                                                                 var7 = "edit(resource-id='" + var11.g() + "')\n";
                                                             } else if (!var11.h().equals("")) {
@@ -583,21 +583,21 @@ public class AndroidAppFSM {
                                                                 var7 = "edit(className='" + var11.f() + "',instance='" + var11.a() + "')\n";
                                                             }
 
-                                                            var6.a(var7, var11.f());
-                                                            B.a();
-                                                            var5 = B.a(var6);
+                                                            var6.setActionCommand(var7, var11.f());
+                                                            ActionHandler.getInstance();
+                                                            var5 = ActionHandler.addAction(var6);
                                                             var2.a(var5);
                                                             System.out.println("[AndroidAppFSM] AgentController: create an *EditText* Action!");
                                                         }
                                                     } else {
                                                         if (var11.i()) {
-                                                            (var6 = new H()).a();
+                                                            (var6 = new H()).setActionID();
                                                             var6.a(var11.e());
-                                                            var6.b(var11.d());
+                                                            var6.setViewText(var11.d());
                                                             var6.c(var2.f());
                                                             var8 = "Screen";
-                                                            var6.a = var8;
-                                                            var6.d("click");
+                                                            var6.actionSource = var8;
+                                                            var6.setActionType("click");
                                                             if (!var11.g().equals("")) {
                                                                 var7 = "click(resource-id='" + var11.g() + "')\n";
                                                             } else if (!var11.h().equals("")) {
@@ -606,21 +606,21 @@ public class AndroidAppFSM {
                                                                 var7 = "click(className='" + var11.f() + "',instance='" + var11.a() + "')\n";
                                                             }
 
-                                                            var6.a(var7, var11.f());
-                                                            B.a();
-                                                            var5 = B.a(var6);
+                                                            var6.setActionCommand(var7, var11.f());
+                                                            ActionHandler.getInstance();
+                                                            var5 = ActionHandler.addAction(var6);
                                                             var2.a(var5);
-                                                            System.out.println("[AndroidAppFSM] AgentController: create A *Click Image* Action!");
+                                                            System.out.println("[AndroidAppFSM] AgentController: create Action *Click Image* Action!");
                                                         }
 
                                                         if (var11.j()) {
-                                                            (var6 = new H()).a();
+                                                            (var6 = new H()).setActionID();
                                                             var6.a(var11.e());
-                                                            var6.b(var11.d());
+                                                            var6.setViewText(var11.d());
                                                             var6.c(var2.f());
                                                             var8 = "Screen";
-                                                            var6.a = var8;
-                                                            var6.d("clickLong");
+                                                            var6.actionSource = var8;
+                                                            var6.setActionType("clickLong");
                                                             if (!var11.g().equals("")) {
                                                                 var7 = "clickLong(resource-id='" + var11.g() + "')\n";
                                                             } else if (!var11.h().equals("")) {
@@ -629,11 +629,11 @@ public class AndroidAppFSM {
                                                                 var7 = "clickLong(className='" + var11.f() + "',instance='" + var11.a() + "')\n";
                                                             }
 
-                                                            var6.a(var7, var11.f());
-                                                            B.a();
-                                                            var5 = B.a(var6);
+                                                            var6.setActionCommand(var7, var11.f());
+                                                            ActionHandler.getInstance();
+                                                            var5 = ActionHandler.addAction(var6);
                                                             var2.a(var5);
-                                                            System.out.println("[AndroidAppFSM] AgentController: create A *Long Click Image* Action!");
+                                                            System.out.println("[AndroidAppFSM] AgentController: create Action *Long Click Image* Action!");
                                                         }
 
                                                         System.out.println("[AndroidAppFSM] AgentController: up to now, detected invokable actions: ");
@@ -644,15 +644,15 @@ public class AndroidAppFSM {
                                                     System.out.println("clickable = " + var11.i() + ", longclickable = " + var11.j());
                                                     if (var11.i()) {
                                                         label195: {
-                                                            (var6 = new H()).a();
+                                                            (var6 = new H()).setActionID();
                                                             var6.a(var11.e());
-                                                            var6.b(var11.d());
+                                                            var6.setViewText(var11.d());
                                                             var6.c(var2.f());
                                                             var8 = "Screen";
-                                                            var6.a = var8;
-                                                            var6.d("click");
+                                                            var6.actionSource = var8;
+                                                            var6.setActionType("click");
                                                             if (!var11.d().equals("")) {
-                                                                if (!E.r) {
+                                                                if (!ConfigOptions.r) {
                                                                     if (!var11.b()) {
                                                                         var7 = "click(text='" + var11.d() + "')\n";
                                                                     } else {
@@ -671,25 +671,25 @@ public class AndroidAppFSM {
                                                                 var7 = "click(content-desc='" + var11.h() + "')\n";
                                                             }
 
-                                                            var6.a(var7, var11.f());
-                                                            B.a();
-                                                            var5 = B.a(var6);
+                                                            var6.setActionCommand(var7, var11.f());
+                                                            ActionHandler.getInstance();
+                                                            var5 = ActionHandler.addAction(var6);
                                                             var2.a(var5);
-                                                            System.out.println("[AndroidAppFSM] AgentController: create A *Click* Action!");
+                                                            System.out.println("[AndroidAppFSM] AgentController: create Action *Click* Action!");
                                                         }
                                                     }
 
                                                     if (var11.j()) {
                                                         label187: {
-                                                            (var6 = new H()).a();
+                                                            (var6 = new H()).setActionID();
                                                             var6.a(var11.e());
-                                                            var6.b(var11.d());
+                                                            var6.setViewText(var11.d());
                                                             var6.c(var2.f());
                                                             var8 = "Screen";
-                                                            var6.a = var8;
-                                                            var6.d("clickLong");
+                                                            var6.actionSource = var8;
+                                                            var6.setActionType("clickLong");
                                                             if (!var11.d().equals("")) {
-                                                                if (!E.r) {
+                                                                if (!ConfigOptions.r) {
                                                                     if (!var11.b()) {
                                                                         var7 = "clickLong(text='" + var11.d() + "')\n";
                                                                     } else {
@@ -708,11 +708,11 @@ public class AndroidAppFSM {
                                                                 var7 = "clickLong(content-desc='" + var11.h() + "')\n";
                                                             }
 
-                                                            var6.a(var7, var11.f());
-                                                            B.a();
-                                                            var5 = B.a(var6);
+                                                            var6.setActionCommand(var7, var11.f());
+                                                            ActionHandler.getInstance();
+                                                            var5 = ActionHandler.addAction(var6);
                                                             var2.a(var5);
-                                                            System.out.println("[AndroidAppFSM] AgentController: create A *Long Click* Action!");
+                                                            System.out.println("[AndroidAppFSM] AgentController: create Action *Long Click* Action!");
                                                         }
                                                     }
 
@@ -722,8 +722,8 @@ public class AndroidAppFSM {
                                                 }
                                             }
 
-                                            B.a();
-                                            B.c(var2);
+                                            ActionHandler.getInstance();
+                                            ActionHandler.c(var2);
                                             System.out.println("==========");
                                             System.out.println("[AndroidAppFSM] AgentController: the final detected invokable actions on this app state: ");
                                             var2.m();
@@ -734,15 +734,15 @@ public class AndroidAppFSM {
                             }
                         } while(!var11.k());
 
-                        (var6 = new H()).a();
+                        (var6 = new H()).setActionID();
                         var6.a(var11.e());
-                        var6.b(var11.d());
+                        var6.setViewText(var11.d());
                         var6.c(var2.f());
                         var8 = "Screen";
-                        var6.a = var8;
-                        var6.d("click");
+                        var6.actionSource = var8;
+                        var6.setActionType("click");
                         if (!var11.d().equals("")) {
-                            if (!E.r) {
+                            if (!ConfigOptions.r) {
                                 if (!var11.b()) {
                                     var7 = "click(text='" + var11.d() + "')\n";
                                 } else {
@@ -765,11 +765,11 @@ public class AndroidAppFSM {
                         }
                     }
 
-                    var6.a(var7, var11.f());
-                    B.a();
-                    var5 = B.a(var6);
+                    var6.setActionCommand(var7, var11.f());
+                    ActionHandler.getInstance();
+                    var5 = ActionHandler.addAction(var6);
                     var2.a(var5);
-                    System.out.println("[AndroidAppFSM] AgentController: create A *Check TextView* Action!");
+                    System.out.println("[AndroidAppFSM] AgentController: create Action *Check TextView* Action!");
                 }
             }
         }
