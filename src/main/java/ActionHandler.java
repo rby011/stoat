@@ -38,7 +38,7 @@ public final class ActionHandler {
         }
     }
 
-    // Q, O, G 의 a() 를 통해 무엇인가 collection 객체를 얻어오고
+    // Q, O, G 의 menuEventListenerNames() 를 통해 무엇인가 collection 객체를 얻어오고
     // 거기서 iterator 를 얻어오는데 그 iterator 는 모두 action source 가 "Static" 인 action 을 가지고 있음을 가정으로 한다
     // 그리고 그 action 들을 모두 action list 에 추가한다
     public static void c() {
@@ -111,7 +111,7 @@ public final class ActionHandler {
         var1.c(var0.f());
         var1.setActionCommand("keyevent_back\n", "");
         Integer var4 = addAction(var1);
-        var0.a(var4);
+        var0.addActionID(var4);
     }
 
     public static void b(AppState var0) {
@@ -125,11 +125,11 @@ public final class ActionHandler {
         var1.c(var0.f());
         var1.setActionCommand("reset\n", "");
         Integer var4 = addAction((Action) var1);
-        var0.a(var4);
+        var0.addActionID(var4);
     }
 
-    public static void c(AppState var0) {
-        String var1 = var0.f();
+    public static void addPossibleSystemAction(AppState state) {
+        String var1 = state.f();
         System.out.println("[ActionHandler] AgentController: add possible SYSTEM actions for the app state in the Activity: " + var1);
         RA var2;
         String var4;
@@ -143,7 +143,7 @@ public final class ActionHandler {
             var2.c(var1);
             var2.setActionCommand("menu\n", "");
             var7 = addAction((Action) var2);
-            var0.a(var7);
+            state.getTransition(var7);
         }
 
         (var2 = new RA()).setActionID();
@@ -154,30 +154,30 @@ public final class ActionHandler {
         var2.c(var1);
         var2.setActionCommand("back\n", "");
         var7 = addAction((Action) var2);
-        var0.a(var7);
-        if (var0.h().a()) {
+        state.getTransition(var7);
+        if (state.h().a()) {
             RA var5;
             (var5 = new RA()).setActionID();
-            var5.a(var0.h().b());
-            var5.c(var0.f());
+            var5.a(state.h().b());
+            var5.c(state.f());
             var4 = "Screen";
             var5.actionSource = var4;
             var5.setActionType("scroll");
             String var8 = "scroll(direction='down')\n";
             var5.setActionCommand(var8, "");
             int var6 = addAction((Action) var5);
-            var0.a(var6);
+            state.getTransition(var6);
             System.out.println("[ActionHandler] AgentController: create Action *Scroll Down* Action!");
             (var5 = new RA()).setActionID();
-            var5.a(var0.h().b());
-            var5.c(var0.f());
+            var5.a(state.h().b());
+            var5.c(state.f());
             var4 = "Screen";
             var5.actionSource = var4;
             var5.setActionType("scroll");
             var8 = "scroll(direction='up')\n";
             var5.setActionCommand(var8, "");
             var6 = addAction((Action) var5);
-            var0.a(var6);
+            state.getTransition(var6);
             System.out.println("[ActionHandler] AgentController: create Action *Scroll Up* Action!");
         }
 

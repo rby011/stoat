@@ -72,7 +72,7 @@ public class TestManager {
             }
 
             var3 = var2.size();
-            if (/*!KA && */var3 <= 0) {
+            if (/*!MenuAction && */var3 <= 0) {
                 throw new AssertionError();
             } else {
                 int var5 = Math.abs((new Random()).nextInt()) % var3;
@@ -152,7 +152,7 @@ public class TestManager {
     private void a(AndroidAppFSM var1, Map var2) {
         System.out.println("[TestManager] AgentController: start test generation ...");
         String var3 = AndroidAppFSM.b();
-        if (/*!KA &&*/var3 == null) {
+        if (/*!MenuAction &&*/var3 == null) {
             throw new AssertionError();
         } else {
             System.out.println("[TestManager] AgentController: the entry state name: " + var3);
@@ -187,7 +187,7 @@ public class TestManager {
                         break;
                     }
 
-                    String var13 = (var12 = var1.a(var5).a(var10)).d();
+                    String var13 = (var12 = var1.a(var5).getTransition(var10)).d();
                     int var11 = var12.c();
                     this.a(var5);
                     this.b(var12.getTransitionID());
@@ -236,7 +236,7 @@ public class TestManager {
             TestManager var12 = this;
             System.out.println("[TestManager] AgentController: start test generation ...");
             String stateName = AndroidAppFSM.b();
-            if (/*!KA && */stateName == null) {
+            if (/*!MenuAction && */stateName == null) {
                 throw new AssertionError();
             }
 
@@ -269,7 +269,7 @@ public class TestManager {
                         break;
                     }
 
-                    Transition var17 = ifsm.a(var15).a(var9);
+                    Transition var17 = ifsm.a(var15).getTransition(var9);
                     System.out.println("selected transition:" + var17);
                     String var10 = var17.d();
                     int var11 = var17.c();
@@ -332,7 +332,7 @@ public class TestManager {
 
     private int b() {
         int var1 = this.b.size();
-        if (/*!KA &&*/ var1 <= 0) {
+        if (/*!MenuAction &&*/ var1 <= 0) {
             throw new AssertionError();
         } else {
             int var2 = 0;

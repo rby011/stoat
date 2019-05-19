@@ -97,7 +97,7 @@ public class SocketServer {
                     AndroidAppFSM.c().d(ConfigOptions.FSMOutputDir/*restoreFSMFromFile.getActionType*/ + "/FSM.txt");
                     var4.println("server: Goodbye!");
                     System.out.println("[SocketServer] AgentController: the server sends *Goodbye* to the [a3e] client, and close the connection with the [a3e] client. ");
-                    System.out.println("[SocketServer] AgentController: the current executed events count: " + a + " maximum allowed events: " + ConfigOptions.MaxFSMBuildingEvent/*restoreFSMFromFile.c*/);
+                    System.out.println("[SocketServer] AgentController: the current executed events count: " + a + " maximum allowed events: " + ConfigOptions.MaxFSMBuildingEvent/*restoreFSMFromFile.addPossibleSystemAction*/);
                     System.out.println("-----------");
                     System.out.println("\n\n");
                     var4.close();

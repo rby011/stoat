@@ -114,18 +114,18 @@ public class AndroidAppFSM {
         if (var5.l()) {
             System.out.println("[AndroidAppFSM] AgentController: this received app state: " + var3 + " is Action *new* state, the transition is Action *new* transition. ");
             var6 = new Transition(this.h(), this.g, var2);
-            var4.a(var6);
+            var4.addTransition(var6);
             System.out.println("[AndroidAppFSM] AgentController: the new transition is : ");
             System.out.println(var6.toString());
         } else {
             System.out.println("[AndroidAppFSM] AgentController: this received app state: " + var3 + " is an *old* app state.");
             var6 = new Transition(this.h(), var5.z(), var2);
             Transition var7;
-            if ((var7 = var4.b(var6)) == null) {
+            if ((var7 = var4.getTransitionInTheMap(var6)) == null) {
                 System.out.println("[AndroidAppFSM] AgentController: the transition is Action *new* transition. ");
                 System.out.println("[AndroidAppFSM] AgentController: this is the new transition: ");
                 System.out.println(var6.toString());
-                var4.a(var6);
+                var4.addTransition(var6);
             } else {
                 System.out.println("[AndroidAppFSM] AgentController: the transition is an *old* transition: ");
                 AppState.updateTransition(var7);
@@ -208,12 +208,12 @@ public class AndroidAppFSM {
             } while(!(var17 = (AppState)this.c.get(var8)).l());
 
             System.out.println("\tunique state name: " + var17.e());
-            Iterator var9 = var17.transitionList.iterator();
+            Iterator var9 = var17.transitionIDList.iterator();
 
             while(var9.hasNext()) {
                 int var10 = (Integer)var9.next();
                 Transition var15;
-                String var11 = (var15 = var17.a(var10)).getSourceState();
+                String var11 = (var15 = var17.getTransition(var10)).getSourceState();
                 String var12 = var15.getDestinationState();
                 System.out.println("\t\ttransition: " + ((AppState)this.c.get(var11)).e() + " -> " + ((AppState)this.c.get(var12)).e() + ", action:" + var15.d());
                 if (((AppState)this.c.get(var12)).k()) {
@@ -245,7 +245,7 @@ public class AndroidAppFSM {
 
                 var2.println(var3.d());
                 var2.println(var3.e() + ";" + var3.f() + ";" + var3.i());
-                Iterator var7 = var3.j().entrySet().iterator();
+                Iterator var7 = var3.getTransitionMap().entrySet().iterator();
 
                 while(var7.hasNext()) {
                     Transition var4 = (Transition)((Entry)var7.next()).getValue();
@@ -290,13 +290,13 @@ public class AndroidAppFSM {
                         Transition transition;
                         (transition = new Transition()).getSourceState(var14[0]);
                         transition.getDestinationState(var14[1]);
-                        transition.getSourceState(Integer.parseInt(var14[2]));
+                        transition.setActionID(Integer.parseInt(var14[2]));
                         transition.c(var14[3]);
                         transition.setTransitionID(Integer.parseInt(var14[4]));
                         transition.setExecutionCount(Integer.parseInt(var14[5]));
                         transition.setG(0.0D);
                         this.i.add(Integer.parseInt(var14[2]));
-                        var5.a(transition);
+                        var5.addTransition(transition);
                     }
 
                     String var16 = var5.d();
@@ -463,7 +463,7 @@ public class AndroidAppFSM {
                             var17.setActionCommand(var1, "");
                             ActionHandler.getInstance();
                             Integer var13 = ActionHandler.addAction(var17);
-                            var2.a(var13);
+                            var2.addActionID(var13);
                             System.out.println("[AndroidAppFSM] AgentController: create Action *Tap* Action!");
                         }
                     } catch (IOException var9) {
@@ -478,7 +478,7 @@ public class AndroidAppFSM {
                 }
 
                 ActionHandler.getInstance();
-                ActionHandler.c(var2);
+                ActionHandler.addPossibleSystemAction(var2);
                 System.out.println("==========");
                 System.out.println("[AndroidAppFSM] AgentController: the final detected invokable actions on this app state: ");
                 var2.m();
@@ -532,7 +532,7 @@ public class AndroidAppFSM {
                                                                         var6.setActionCommand(var7, var11.f());
                                                                         ActionHandler.getInstance();
                                                                         var5 = ActionHandler.addAction(var6);
-                                                                        var2.a(var5);
+                                                                        var2.addActionID(var5);
                                                                         System.out.println("[AndroidAppFSM] AgentController: create Action *SeekBar Click* Action!");
                                                                     }
                                                                 }
@@ -563,7 +563,7 @@ public class AndroidAppFSM {
                                                                     var6.setActionCommand(var7, var11.f());
                                                                     ActionHandler.getInstance();
                                                                     var5 = ActionHandler.addAction(var6);
-                                                                    var2.a(var5);
+                                                                    var2.addActionID(var5);
                                                                     System.out.println("[AndroidAppFSM] AgentController: create Action *CheckBox/RadioButton* Action!");
                                                                 }
                                                             }
@@ -586,7 +586,7 @@ public class AndroidAppFSM {
                                                             var6.setActionCommand(var7, var11.f());
                                                             ActionHandler.getInstance();
                                                             var5 = ActionHandler.addAction(var6);
-                                                            var2.a(var5);
+                                                            var2.addActionID(var5);
                                                             System.out.println("[AndroidAppFSM] AgentController: create an *EditText* Action!");
                                                         }
                                                     } else {
@@ -609,7 +609,7 @@ public class AndroidAppFSM {
                                                             var6.setActionCommand(var7, var11.f());
                                                             ActionHandler.getInstance();
                                                             var5 = ActionHandler.addAction(var6);
-                                                            var2.a(var5);
+                                                            var2.addActionID(var5);
                                                             System.out.println("[AndroidAppFSM] AgentController: create Action *Click Image* Action!");
                                                         }
 
@@ -632,7 +632,7 @@ public class AndroidAppFSM {
                                                             var6.setActionCommand(var7, var11.f());
                                                             ActionHandler.getInstance();
                                                             var5 = ActionHandler.addAction(var6);
-                                                            var2.a(var5);
+                                                            var2.addActionID(var5);
                                                             System.out.println("[AndroidAppFSM] AgentController: create Action *Long Click Image* Action!");
                                                         }
 
@@ -674,7 +674,7 @@ public class AndroidAppFSM {
                                                             var6.setActionCommand(var7, var11.f());
                                                             ActionHandler.getInstance();
                                                             var5 = ActionHandler.addAction(var6);
-                                                            var2.a(var5);
+                                                            var2.addActionID(var5);
                                                             System.out.println("[AndroidAppFSM] AgentController: create Action *Click* Action!");
                                                         }
                                                     }
@@ -711,7 +711,7 @@ public class AndroidAppFSM {
                                                             var6.setActionCommand(var7, var11.f());
                                                             ActionHandler.getInstance();
                                                             var5 = ActionHandler.addAction(var6);
-                                                            var2.a(var5);
+                                                            var2.addActionID(var5);
                                                             System.out.println("[AndroidAppFSM] AgentController: create Action *Long Click* Action!");
                                                         }
                                                     }
@@ -723,7 +723,7 @@ public class AndroidAppFSM {
                                             }
 
                                             ActionHandler.getInstance();
-                                            ActionHandler.c(var2);
+                                            ActionHandler.addPossibleSystemAction(var2);
                                             System.out.println("==========");
                                             System.out.println("[AndroidAppFSM] AgentController: the final detected invokable actions on this app state: ");
                                             var2.m();
@@ -768,7 +768,7 @@ public class AndroidAppFSM {
                     var6.setActionCommand(var7, var11.f());
                     ActionHandler.getInstance();
                     var5 = ActionHandler.addAction(var6);
-                    var2.a(var5);
+                    var2.addActionID(var5);
                     System.out.println("[AndroidAppFSM] AgentController: create Action *Check TextView* Action!");
                 }
             }

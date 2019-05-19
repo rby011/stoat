@@ -12,10 +12,10 @@ import java.util.*;
 public class AppState {
     private List b = new ArrayList();
     private List actionIDList = new ArrayList();
-    private Map d = new HashMap();
-    public List transitionList = new ArrayList();
-    private int e;
-    private UIPage f;
+    private Map transitionMap = new HashMap();
+    public List transitionIDList = new ArrayList();
+    private int transitionSize;
+    private UIPage uiPage;
     private String g;
     private String h;
     private String i;
@@ -23,7 +23,7 @@ public class AppState {
     private String k;
     private String l;
 
-    // f.a, f.b 컬렉션 내 아이템별로 a(), b() 값을 얻어와 하나의 string 으로 만들어
+    // uiPage.menuEventListenerNames, uiPage.getTransitionInTheMap 컬렉션 내 아이템별로 menuEventListenerNames(), getTransitionInTheMap() 값을 얻어와 하나의 string 으로 만들어
     // 이를 MD5 다이제스트로 인코드하고 이를 정수로 변환해서 저장한다
     // 앱 상태를 정수로 표현하는 로직으로 보인다
     public final void a() {
@@ -33,12 +33,12 @@ public class AppState {
 
             Iterator var3;
             V var4;
-            for (var3 = this.f.a.iterator(); var3.hasNext(); var2 = var2 + var4.a() + var4.b()) {
+            for (var3 = this.uiPage.a.iterator(); var3.hasNext(); var2 = var2 + var4.a() + var4.b()) {
                 var4 = (V) var3.next();
             }
 
             U var6;
-            for (var3 = this.f.b.iterator(); var3.hasNext(); var2 = var2 + var6.e() + var6.f()) {
+            for (var3 = this.uiPage.b.iterator(); var3.hasNext(); var2 = var2 + var6.e() + var6.f()) {
                 var6 = (U) var3.next();
             }
 
@@ -81,7 +81,7 @@ public class AppState {
     }
 
     public final void a(UIPage var1) {
-        this.f = var1;
+        this.uiPage = var1;
     }
 
     public final String z() {
@@ -105,37 +105,37 @@ public class AppState {
     }
 
     public final UIPage h() {
-        return this.f;
+        return this.uiPage;
     }
 
     public final int i() {
-        return this.e;
+        return this.transitionSize;
     }
 
-    public final Transition a(int var1) {
-        return (Transition) this.d.get(var1);
+    public final Transition getTransition(int transitionID) {
+        return (Transition) this.transitionMap.get(transitionID);
     }
 
-    public final Map j() {
-        return this.d;
+    public final Map getTransitionMap() {
+        return this.transitionMap;
     }
 
     public final boolean k() {
         return this.k != null;
     }
 
-    public final void a(Transition var1) {
-        this.d.put(var1.getTransitionID(), var1);
-        this.transitionList.add(var1.getTransitionID());
-        this.e = this.transitionList.size();
-        System.out.println("[AppState] AgentController: now the app state " + this.h + " has " + this.e + " unique transitions.");
+    public final void addTransition(Transition transition) {
+        this.transitionMap.put(transition.getTransitionID(), transition);
+        this.transitionIDList.add(transition.getTransitionID());
+        this.transitionSize = this.transitionIDList.size();
+        System.out.println("[AppState] AgentController: now the app state " + this.h + " has " + this.transitionSize + " unique transitions.");
     }
 
     public final boolean l() {
         return this.j == null;
     }
 
-    public final void a(Integer actionID) {
+    public final void addActionID(Integer actionID) {
         System.out.println("[AppState] AgentController: add an action <id: " + actionID + "> into the app state'TestManager invokable actions list");
         this.actionIDList.add(actionID);
     }
@@ -194,20 +194,20 @@ public class AppState {
         return var1;
     }
 
-    public final Transition b(Transition orginal) {
-        Iterator iterator = this.transitionList.iterator();
+    public final Transition getTransitionInTheMap(Transition transition) {
+        Iterator iterator = this.transitionIDList.iterator();
 
         int transitionID;
-        Transition replace;
+        Transition inTheMapTransition;
         do {
             if (!iterator.hasNext()) {
                 return null;
             }
             transitionID = (Integer) iterator.next();
-        } while (!(replace = (Transition) this.d.get(transitionID)).compareTransition(orginal)); // 그래프 형태인듯 하다
+        } while (!(inTheMapTransition = (Transition) this.transitionMap.get(transitionID)).compareTransition(transition));
 
-        System.out.println("[AppState] AgentController: this is Action duplicate transition, alias to the transition: id@ " + replace.getTransitionID());
-        return replace;
+        System.out.println("[AppState] AgentController: this is Action duplicate transition, alias to the transition: id@ " + inTheMapTransition.getTransitionID());
+        return inTheMapTransition;
     }
 
     public static void updateTransition(Transition transition) {
@@ -218,7 +218,7 @@ public class AppState {
     }
 
     public final void o() {
-        System.out.println("[AppState] AgentController:  this state has " + this.e + " transitions.");
+        System.out.println("[AppState] AgentController:  this state has " + this.transitionSize + " transitions.");
         int var3;
         if (ConfigOptions.s) {
             System.out.println("[AppState] AgentController: init the probab from fsm building");
@@ -226,29 +226,29 @@ public class AppState {
 
             int var2;
             Transition var9;
-            for (var2 = 0; var2 < this.e; ++var2) {
-                var3 = (Integer) this.transitionList.get(var2);
-                var9 = (Transition) this.d.get(var3);
+            for (var2 = 0; var2 < this.transitionSize; ++var2) {
+                var3 = (Integer) this.transitionIDList.get(var2);
+                var9 = (Transition) this.transitionMap.get(var3);
                 var8 += var9.getExecutionCount();
             }
 
             System.out.println("[AppState] AgentController: total executed times: " + var8);
 
-            for (var2 = 0; var2 < this.e; ++var2) {
-                var3 = (Integer) this.transitionList.get(var2);
+            for (var2 = 0; var2 < this.transitionSize; ++var2) {
+                var3 = (Integer) this.transitionIDList.get(var2);
                 int var5;
-                double var6 = (double) (var5 = (var9 = (Transition) this.d.get(var3)).getExecutionCount()) / (double) var8;
+                double var6 = (double) (var5 = (var9 = (Transition) this.transitionMap.get(var3)).getExecutionCount()) / (double) var8;
                 var9.setG(var6);
                 System.out.println("[AppState] AgentController: the execution prob: transition id: " + var3 + ", execution time: " + var5 + ", prob: " + var6);
             }
 
         } else {
             System.out.println("[AppState] AgentController: init the probab by using the average probability");
-            double var1 = 1.0D / (double) this.e;
+            double var1 = 1.0D / (double) this.transitionSize;
 
-            for (var3 = 0; var3 < this.e; ++var3) {
-                int var4 = (Integer) this.transitionList.get(var3);
-                ((Transition) this.d.get(var4)).setG(var1);
+            for (var3 = 0; var3 < this.transitionSize; ++var3) {
+                int var4 = (Integer) this.transitionIDList.get(var3);
+                ((Transition) this.transitionMap.get(var4)).setG(var1);
                 System.out.println("[AppState] AgentController: the execution prob: transition id: " + var4 + ", prob: " + var1);
             }
 

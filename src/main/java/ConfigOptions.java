@@ -14,14 +14,14 @@ import java.nio.charset.Charset;
 public final class ConfigOptions {
     public static String AndroidSDKDir;     //  aList
     public static String AndroidLIBDir;     //  bList
-    public static int MaxFSMBuildingEvent;  //  c
+    public static int MaxFSMBuildingEvent;  //  addPossibleSystemAction
     public static int Port;                 //  setActionType
     public static String FSMOutputConfig;   //  restoreFSMFromFile
     public static String FSMOutputDir;      //  getActionType
     public static String MCMCSamplingOutputConfig;  //  increaseExecutionCount
     public static String MCMCSamplingOutputDir;     //  getExecutionCount
     public static String i;                 //  i
-    public static String FSMFilePath;       //  j
+    public static String FSMFilePath;       //  getTransitionMap
     public static boolean StaticAnalysisResult;     //  k
     public static int MaxMCMCIteration;     //  l
     public static int MaxTestSuiteSize;     //  m

@@ -12,48 +12,48 @@ import java.util.List;
 
 public final class L {
     private static L b = new L();
-    private List c = null;
-    public final String[] a = new String[]{"onCreateOptionsMenu", "onCreateContextMenu"};
+    private List menuActionList = null;
+    public final String[] menuEventListenerNames = new String[]{"onCreateOptionsMenu", "onCreateContextMenu"};
 
     private L() {
-        this.c = new ArrayList();
+        this.menuActionList = new ArrayList();
     }
 
     public static L a() {
         return b;
     }
 
-    public final void a(KA var1) {
-        this.c.add(var1);
+    public final void a(MenuAction menuAction) {
+        this.menuActionList.add(menuAction);
     }
 
     public final boolean a(String var1) {
-        if (this.c.size() == 0) {
+        if (this.menuActionList.size() == 0) {
             return false;
         } else {
-            Iterator var2 = this.c.iterator();
+            Iterator iterator = this.menuActionList.iterator();
 
-            KA var3;
+            MenuAction var3;
             do {
-                if (!var2.hasNext()) {
+                if (!iterator.hasNext()) {
                     return false;
                 }
-            } while(!(var3 = (KA)var2.next()).i().equals(this.a[0]) || !var3.e().equals(var1));
+            } while(!(var3 = (MenuAction)iterator.next()).i().equals(this.menuEventListenerNames[0]) || !var3.e().equals(var1));
 
             return true;
         }
     }
 
     public final void b() {
-        if (this.c.size() != 0) {
+        if (this.menuActionList.size() != 0) {
             System.out.println("---------------------");
             System.out.println("Detected Inherited Actions: ");
             System.out.println("ActionID\tActionName \t\tOverrideMethodLine\t\tOverrideMethod\t\tActivityName");
             System.out.println("---------------------");
-            Iterator var1 = this.c.iterator();
+            Iterator var1 = this.menuActionList.iterator();
 
             while(var1.hasNext()) {
-                KA var2 = (KA)var1.next();
+                MenuAction var2 = (MenuAction)var1.next();
                 System.out.println(var2.toString());
             }
 
@@ -61,7 +61,7 @@ public final class L {
     }
 
     public final void b(String var1) {
-        if (this.c.size() != 0) {
+        if (this.menuActionList.size() != 0) {
             PrintWriter var2 = null;
 
             try {
@@ -77,10 +77,10 @@ public final class L {
             var2.println("Detected Inherited Actions: ");
             var2.println("ActionID\tActionName \t\tOverrideMethodLine\t\tOverrideMethod\t\tActivityName");
             var2.println("---------------------");
-            Iterator var3 = this.c.iterator();
+            Iterator var3 = this.menuActionList.iterator();
 
             while(var3.hasNext()) {
-                KA var4 = (KA)var3.next();
+                MenuAction var4 = (MenuAction)var3.next();
                 var2.println(var4.toString());
             }
 

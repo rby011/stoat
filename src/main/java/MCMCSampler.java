@@ -63,7 +63,7 @@ public class MCMCSampler {
 
             ArrayList var5 = new ArrayList();
 
-            for (Iterator var16 = var2.j().entrySet().iterator(); var16.hasNext(); ++d) {
+            for (Iterator var16 = var2.getTransitionMap().entrySet().iterator(); var16.hasNext(); ++d) {
                 Entry var6;
                 int var7 = (Integer) (var6 = (Entry) var16.next()).getKey();
                 double var13 = ((Transition) var6.getValue()).f();
@@ -379,7 +379,7 @@ public class MCMCSampler {
             System.out.println("start mcmc sampling");
             ConfigOptions.b(var0[1]);
             ConfigOptions.c(/*restoreFSMFromFile.increaseExecutionCount*/ConfigOptions.MCMCSamplingOutputConfig);
-            (var1 = new AndroidAppFSM((byte) 0)).restoreFSMFromFile(ConfigOptions.FSMFilePath/*restoreFSMFromFile.j*/ + "/FSM.txt");
+            (var1 = new AndroidAppFSM((byte) 0)).restoreFSMFromFile(ConfigOptions.FSMFilePath/*restoreFSMFromFile.getTransitionMap*/ + "/FSM.txt");
             var1.f();
             TestManager.a().a(var1);
             a().c(var1);
@@ -387,7 +387,7 @@ public class MCMCSampler {
             if (var0[0].equals("--compare")) {
                 System.out.println("compare mcmc sampling");
                 ConfigOptions.c("CONF.txt");
-                (var1 = new AndroidAppFSM((byte) 0)).restoreFSMFromFile(ConfigOptions.FSMFilePath/*restoreFSMFromFile.j*/ + "/FSM.txt");
+                (var1 = new AndroidAppFSM((byte) 0)).restoreFSMFromFile(ConfigOptions.FSMFilePath/*restoreFSMFromFile.getTransitionMap*/ + "/FSM.txt");
                 var1.f();
                 TestManager.a().a(var1);
                 a().b(var1);

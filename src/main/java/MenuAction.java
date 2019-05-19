@@ -3,12 +3,12 @@
 // (powered by Fernflower decompiler)
 //
 
-public final class KA extends Action {
+public final class MenuAction extends Action {
     private String c;
     private int d;
     private String e;
 
-    public KA() {
+    public MenuAction() {
         this.setViewID(-1);
         this.c = "";
         this.d = -1;
@@ -25,7 +25,7 @@ public final class KA extends Action {
     }
 
     public final String i() {
-        return this.e;
+        return this.e;//onCreateOptionsMenu 리스너 이름으로 추청된다
     }
 
     public final String toString() {

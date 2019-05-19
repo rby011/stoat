@@ -8,7 +8,7 @@ public final class Transition {
     private String uState;
     private String vState;
 
-    private int c;
+    private int actoinID;
     private String d;
     private int transitionID;
     private int executedCount = 1;
@@ -23,7 +23,7 @@ public final class Transition {
         this.transitionID = ID_SEED++;
         this.uState = uState;
         this.vState = vState;
-        this.c = var3;
+        this.actoinID = var3;
         ActionHandler.getInstance();
         this.d = ActionHandler.getAction(var3).getActionCommand();
     }
@@ -37,7 +37,7 @@ public final class Transition {
     }
 
     public final int c() {
-        return this.c;
+        return this.actoinID;
     }
 
     public final String d() {
@@ -60,8 +60,8 @@ public final class Transition {
         this.vState = var1;
     }
 
-    public final void getSourceState(int var1) {
-        this.c = var1;
+    public final void setActionID(int actionID) {
+        this.actoinID = actionID;
     }
 
     public final void c(String var1) {
@@ -81,7 +81,7 @@ public final class Transition {
     }
 
     public final boolean compareTransition(Transition transition) {
-        if (this.c != transition.c) {
+        if (this.actoinID != transition.actoinID) {
             System.out.println("AgentController: these two transitions have different action ids.");
             return false;
         } else if (!this.uState.equals(transition.uState)) {
